@@ -1,4 +1,5 @@
 .profile__add-button {
+    padding: 0;
     position: absolute;
     align-self: center;
     right: 0;

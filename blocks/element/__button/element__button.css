@@ -9,3 +9,13 @@
     border: none;
     align-self: center;
 }
+
+.element__button:hover {
+    opacity: 0.5;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+.element__button:active {
+    background-image: url(../../../images/Union.png);
+}

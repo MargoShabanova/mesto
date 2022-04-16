@@ -5,4 +5,4 @@
 
 **GitHub Pages**
 
-* [Ссылка на проект]()
+* [Ссылка на проект](https://margoshabanova.github.io/mesto/index.html)

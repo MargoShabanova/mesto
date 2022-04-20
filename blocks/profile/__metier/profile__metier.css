@@ -4,6 +4,10 @@
     font-size: 18px;
     line-height: 22px;
     color: #fff;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 294px;
 }
 
 @media (max-width: 700px) {
@@ -16,5 +20,6 @@
     .profile__metier {
         font-size: 14px;
         line-height: 17px;
+        max-width: 189px;
     }
 }

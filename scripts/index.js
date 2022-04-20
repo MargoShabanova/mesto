@@ -29,8 +29,8 @@ const userMetier =document.querySelector('.profile__metier');
 
 const formElement = document.querySelector('.form');
 
-const nameInput = document.querySelector('.form__item_name');
-const jobInput = document.querySelector('.form__item_metier');
+const nameInput = document.querySelector('.form__item_type_name');
+const jobInput = document.querySelector('.form__item_type_metier');
 
 function formSubmitHandler (evt) {
    evt.preventDefault();

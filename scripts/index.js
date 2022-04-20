@@ -5,39 +5,42 @@ const submit = document.querySelector('.form__submit');
 
 function popupOpenToggle() {
     popup.classList.toggle('popup_opened');
+    nameInput.value = userName.textContent;
+    jobInput.value = userMetier.textContent;
 }
 
-function popupOvarlayClickHandler(evt) {
-    if (evt.target === evt.currentTarget) {
-        popupOpenToggle();
-    }
-}
+//function popupOvarlayClickHandler(evt) {
+//    if (evt.target === evt.currentTarget) {
+//        popupOpenToggle();
+//    }
+//}
 
 popupOpenButton.addEventListener('click', popupOpenToggle);
 
 popupCloseButton.addEventListener('click', popupOpenToggle);
 
-popup.addEventListener('click', popupOvarlayClickHandler);
+//popup.addEventListener('click', popupOvarlayClickHandler);
 
-submit.addEventListener('click', popupOpenToggle);
+//submit.addEventListener('click', popupOpenToggle);
 
 
-let userName = document.querySelector('.profile__name');
-let userMetier =document.querySelector('.profile__metier');
+const userName = document.querySelector('.profile__name');
+const userMetier =document.querySelector('.profile__metier');
 
-let formElement = document.querySelector('.form');
+const formElement = document.querySelector('.form');
 
-let nameInput = document.querySelector('.form__item_name');
-let jobInput = document.querySelector('.form__item_metier');
-
-nameInput.setAttribute('value', 'Жак-Ив Кусто');
-jobInput.setAttribute('value', 'Исследователь океана');
+const nameInput = document.querySelector('.form__item_name');
+const jobInput = document.querySelector('.form__item_metier');
 
 function formSubmitHandler (evt) {
-   evt.preventDefault(); 
+   evt.preventDefault();
 
     userName.textContent = nameInput.value;
     userMetier.textContent = jobInput.value;
-}
+};
+
+submit.onclick = function() {
+    popup.classList.remove('popup_opened');
+};
 
 formElement.addEventListener('submit', formSubmitHandler);

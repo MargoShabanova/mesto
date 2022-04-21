@@ -1,12 +1,14 @@
 const popupOpenButton = document.querySelector('.profile__edit-button');
 const popup = document.querySelector('.popup');
 const popupCloseButton = popup.querySelector('.popup__close');
-const submit = document.querySelector('.form__submit');
+//const submit = document.querySelector('.form__submit');
 
 function popupOpenToggle() {
     popup.classList.toggle('popup_opened');
-    nameInput.value = userName.textContent;
-    jobInput.value = userMetier.textContent;
+    if (popup.classList.contains('popup_opened')) {
+        nameInput.value = userName.textContent;
+        jobInput.value = userMetier.textContent;
+    }
 }
 
 //function popupOvarlayClickHandler(evt) {
@@ -37,10 +39,8 @@ function formSubmitHandler (evt) {
 
     userName.textContent = nameInput.value;
     userMetier.textContent = jobInput.value;
-};
 
-submit.onclick = function() {
-    popup.classList.remove('popup_opened');
+    popupOpenToggle();      
 };
 
 formElement.addEventListener('submit', formSubmitHandler);

@@ -25,7 +25,11 @@ const initialCards = [
     }
   ];
 
-//дом элементы
+//Шаблоны
+
+const cardTemplate = document.querySelector('#initial-template').content.querySelector('.element_checked');
+
+//Дом элементы
 
 const cardContainer = document.querySelector('.elements__list');
 const formAddCard = document.querySelector('.form_add-card');
@@ -39,22 +43,37 @@ const placeImage = document.querySelector('.element__photo');
 const inputPlaceName = document.querySelector('.form__item_place-name');
 const inputPicture = document.querySelector('.form__item_picture-link');
 
+//Обработчики событий
+
+const formCreateHandler = (evt) => {
+  evt.preventDefault();
+
+  renderCard({ link: inputPicture.value, name: inputPlaceName.value });
+  inputPicture.value = '';
+  inputPlaceName.value = '';
+
+  popupAddOpenToggle();
+};
+
+//Генерация карточки
+
+const generateCard = (cardItem) => {
+  const newCard = cardTemplate.cloneNode(true);
+
+  const nameCard = newCard.querySelector('.element__name');
+  const imageCard = newCard.querySelector('.element__photo');
+
+  nameCard.textContent = cardItem.name;
+  imageCard.src = cardItem.link;
+  imageCard.alt = cardItem.name;
+
+  return newCard;
+}
+
 //Рендер карточки
 
 const renderCard = (cardItem) => {
-  cardContainer.insertAdjacentHTML(
-    "afterbegin",
-    `
-    <li class="element element_checked">
-      <img class="element__photo" src="${cardItem.link}" alt="">
-      <button class="element__delete" type="button"></button>
-      <div class="element__name-container">
-        <h2 class="element__name">${cardItem.name}</h2>
-        <button class="element__button" type="button"></button>
-      </div>
-    </li>
-    `
-  );
+  cardContainer.prepend(generateCard(cardItem));
 }
 
 initialCards.forEach((cardItem) => {
@@ -68,17 +87,6 @@ function popupAddOpenToggle() {
 profileAddButton.addEventListener('click', popupAddOpenToggle);
 popupAddCloseButton.addEventListener('click', popupAddOpenToggle);
 
-//обработчики событий
-
-function formCreateHandler (evt) {
-    evt.preventDefault();
-
-    renderCard({ link: inputPicture.value, name: inputPlaceName.value });
-    inputPicture.value = '';
-    inputPlaceName.value = '';
- 
-    popupAddOpenToggle();
-};
 
 formAddCard.addEventListener('submit', formCreateHandler);
  

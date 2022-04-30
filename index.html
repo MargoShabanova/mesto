@@ -14,26 +14,20 @@
 
 			<main>
 				<section class="profile">
-					<img class="profile__avatar" src="./images/image.jpg" alt="фото пользователя">
-					<div class="profile__info">
-						<h1 class="profile__name">Жак-Ив Кусто</h1>
-						<button class="profile__edit-button" type="button"></button>
-						<p class="profile__metier">Исследователь океана</p>
-					</div>
+          <div class="profile__container">
+					  <img class="profile__avatar" src="./images/image.jpg" alt="фото пользователя">
+					  <div class="profile__info">
+						  <h1 class="profile__name">Жак-Ив Кусто</h1>
+						  <button class="profile__edit-button" type="button"></button>
+						  <p class="profile__metier">Исследователь океана</p>
+					  </div>
+          </div>
 					<button class="profile__add-button" type="button"></button>
 				</section>
 
         <section class="elements">
-          <template id="initial-template">
-            <div class="element element_checked">
-              <img class="element__photo" src="./images/Karachaevsk.jpg" alt="Сентинский Храм">
-              <button class="element__delete" type="button"></button>
-              <div class="element__name-container">
-                <h2 class="element__name">Карачаевск</h2>
-                <button class="element__button" type="button"></button>
-              </div>
-            </div>
-          </template>
+          <ul class="elements__list">
+          </ul>
         </section>
       </main>
 
@@ -41,29 +35,29 @@
           <p class="footer__copyright">© 2020 Mesto Russia</p>
         </footer>
 
-        <div class="popup popup__profile">
+        <div class="popup popup_profile">
           <div class="popup__container">
-            <button class="popup__close"></button>
-            <form class="form">
+            <button class="popup__close popup__close-profile"></button>
+            <form class="form" name="edit-profile">
               <h2 class="form__title">Редактировать профиль</h2>
-              <fieldset class="form__content">
-                <input type="text" class="form__item form__item_name" placeholder="Имя">
-                <input type="text" class="form__item form__item_metier" placeholder="О себе">
-                <button type="submit" class="form__submit">Сохранить</button>
+              <fieldset class="form__container">
+                <input type="text" class="form__item form__item_type_name" placeholder="Имя">
+                <input type="text" class="form__item form__item_type_metier" placeholder="О себе">
+                <button type="submit" class="form__submit form__submit_save">Сохранить</button>
               </fieldset> 
             </form>
           </div>
         </div>
 
-	      <div class="popup popup__add">
+	      <div class="popup popup_add">
           <div class="popup__container">
-            <button class="popup__close"></button>
-            <form class="form">
+            <button class="popup__close popup__close-cards"></button>
+            <form class="form" name="add-image">
               <h2 class="form__title">Новое место</h2>
-              <fieldset class="form__content">
+              <fieldset class="form__container">
                 <input type="text" class="form__item form__item_place-name" placeholder="Название">
                 <input type="text" class="form__item form__item_picture-link" placeholder="Ссылка на картинку">
-                <button type="submit" class="form__submit">Создать</button>
+                <button type="submit" class="form__submit form__submit_create">Создать</button>
               </fieldset> 
             </form>
           </div>
@@ -71,11 +65,22 @@
 
         <div class="popup popup__open-card">
           <div class="popup__card-container">
-            <button class="popup__close" type="button"></button>
+            <button class="popup__close popup__close_image" type="button"></button>
             <img class="popup__image" src="#" alt="">
             <h2 class="popup__image-title"></h2>
           </div>
         </div>
+
+        <template id="initial-template">
+          <li class="element element_checked">
+            <img class="element__photo" src="#" alt=""/>
+            <button class="element__delete" type="button"></button>
+            <div class="element__name-container">
+              <h2 class="element__name"></h2>
+              <button class="element__button" type="button"></button>
+            </div>
+          </li>
+        </template>
 
       
 	    <script src="./scripts/cards.js"></script>

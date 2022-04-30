@@ -24,26 +24,26 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
   ];
+//дом элементы
+const popupAddOpenButton = document.querySelector('.profile__add-button');
+const cardContainer = document.querySelector('.elements__list')
+//Рендер карточки
 
-  const popupAddOpenButton = document.querySelector('.profile__add-button');
+function renderCard(cardItem) {
+  cardContainer.insertAdjacentHTML(
+    "afterbegin",
+    `
+    <div class="element element_checked">
+      <img class="element__photo" src="${cardItem.link}" alt="">
+      <div class="element__name-container">
+        <h2 class="element__name">${cardItem.name}</h2>
+        <button class="element__button" type="button"></button>
+      </div>
+    </div>
+    `
+  );
+}
 
-  //Рендер карточки
-
-  const renderToDoCard = (todoData) => {
-    initialContainer.insertAdjacentHTML(
-        'afterbegin', 
-        `
-        <div class="element element_checked">
-          <img class="element__photo" src="./images/Karachaevsk.jpg" alt="Сентинский Храм">
-          <div class="element__name-container">
-            <h2 class="element__name">${initial.title}</h2>
-            <button class="element__button" type="button"></button>
-          </div>
-    	</div>
-        `
-    )
-  }
-
-  initialCards.forEach((todoData) => {
-      renderToDoCard(todoData);
+  initialCards.forEach((cardItem) => {
+      renderCard(cardItem);
   });

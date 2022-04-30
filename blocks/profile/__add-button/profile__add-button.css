@@ -1,6 +1,6 @@
 .profile__add-button {
+    box-sizing: border-box;
     padding: 0;
-    position: absolute;
     align-self: center;
     right: 0;
     width: 150px;

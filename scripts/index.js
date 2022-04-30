@@ -1,43 +1,71 @@
-const popupOpenButton = document.querySelector('.profile__edit-button');
-const popup = document.querySelector('.popup');
-const popupCloseButton = popup.querySelector('.popup__close');
-const submit = document.querySelector('.form__submit');
+const profileEditButton = document.querySelector('.profile__edit-button');
+const popupProfile = document.querySelector('.popup_profile');
+const profileEditCloseButton = document.querySelector('.popup__close-profile');
 
-function popupOpenToggle() {
-    popup.classList.toggle('popup_opened');
-}
-
-function popupOvarlayClickHandler(evt) {
-    if (evt.target === evt.currentTarget) {
-        popupOpenToggle();
+function popupProfileOpenToggle() {
+    popupProfile.classList.toggle('popup_opened');
+    if (popupProfile.classList.contains('popup_opened')) {
+        nameInput.value = userName.textContent;
+        jobInput.value = userMetier.textContent;
     }
 }
 
-popupOpenButton.addEventListener('click', popupOpenToggle);
+//function popupOvarlayClickHandler(evt) {
+//    if (evt.target === evt.currentTarget) {
+//        popupOpenToggle();
+//    }
+//}
 
-popupCloseButton.addEventListener('click', popupOpenToggle);
+profileEditButton.addEventListener('click', popupProfileOpenToggle);
 
-popup.addEventListener('click', popupOvarlayClickHandler);
+profileEditCloseButton.addEventListener('click', popupProfileOpenToggle);
 
-submit.addEventListener('click', popupOpenToggle);
+//popup.addEventListener('click', popupOvarlayClickHandler);
+
+//submit.addEventListener('click', popupOpenToggle);
 
 
-let userName = document.querySelector('.profile__name');
-let userMetier =document.querySelector('.profile__metier');
+const userName = document.querySelector('.profile__name');
+const userMetier =document.querySelector('.profile__metier');
 
-let formElement = document.querySelector('.form');
+const formElement = document.querySelector('.form');
 
-let nameInput = document.querySelector('.form__item_name');
-let jobInput = document.querySelector('.form__item_metier');
-
-nameInput.setAttribute('value', 'Жак-Ив Кусто');
-jobInput.setAttribute('value', 'Исследователь океана');
+const nameInput = document.querySelector('.form__item_type_name');
+const jobInput = document.querySelector('.form__item_type_metier');
 
 function formSubmitHandler (evt) {
-   evt.preventDefault(); 
+   evt.preventDefault();
 
     userName.textContent = nameInput.value;
     userMetier.textContent = jobInput.value;
-}
+
+    popupProfileOpenToggle();  
+};
 
 formElement.addEventListener('submit', formSubmitHandler);
+
+const profileAddButton = document.querySelector('.profile__add-button');
+const popupAddCard = document.querySelector('.popup_add');
+const popupAddCloseButton = document.querySelector('.popup__close-cards');
+
+const placeName = document.querySelector('.element__name');
+const placeImage = document.querySelector('.element__photo');
+
+const formPlaceName =document.querySelector('.form__item_place-name');
+const formPictureLink = document.querySelector('.form__item_picture-link');
+
+function popupAddOpenToggle() {
+    popupAddCard.classList.toggle('popup_opened');
+}
+
+profileAddButton.addEventListener('click', popupAddOpenToggle);
+popupAddCloseButton.addEventListener('click', popupAddOpenToggle);
+
+function formCreateHandler (evt) {
+    evt.preventDefault();
+ 
+    formPlaceName.textContent = placeName.value;
+    formPictureLink.textContent = placeImage.value;
+ 
+     popupAddOpenToggle();
+ };

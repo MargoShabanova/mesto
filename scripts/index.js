@@ -1,3 +1,4 @@
+//попап редактирования профиля
 const profileEditButton = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.popup_profile');
 const profileEditCloseButton = document.querySelector('.popup__close-profile');
@@ -28,7 +29,7 @@ profileEditCloseButton.addEventListener('click', popupProfileOpenToggle);
 const userName = document.querySelector('.profile__name');
 const userMetier =document.querySelector('.profile__metier');
 
-const formElement = document.querySelector('.form');
+const formProfile = document.querySelector('.form_profile');
 
 const nameInput = document.querySelector('.form__item_type_name');
 const jobInput = document.querySelector('.form__item_type_metier');
@@ -42,30 +43,7 @@ function formSubmitHandler (evt) {
     popupProfileOpenToggle();  
 };
 
-formElement.addEventListener('submit', formSubmitHandler);
+formProfile.addEventListener('submit', formSubmitHandler);
 
-const profileAddButton = document.querySelector('.profile__add-button');
-const popupAddCard = document.querySelector('.popup_add');
-const popupAddCloseButton = document.querySelector('.popup__close-cards');
+//попап добавления места
 
-const placeName = document.querySelector('.element__name');
-const placeImage = document.querySelector('.element__photo');
-
-const formPlaceName =document.querySelector('.form__item_place-name');
-const formPictureLink = document.querySelector('.form__item_picture-link');
-
-function popupAddOpenToggle() {
-    popupAddCard.classList.toggle('popup_opened');
-}
-
-profileAddButton.addEventListener('click', popupAddOpenToggle);
-popupAddCloseButton.addEventListener('click', popupAddOpenToggle);
-
-function formCreateHandler (evt) {
-    evt.preventDefault();
- 
-    formPlaceName.textContent = placeName.value;
-    formPictureLink.textContent = placeImage.value;
- 
-     popupAddOpenToggle();
- };

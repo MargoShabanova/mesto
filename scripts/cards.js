@@ -55,6 +55,14 @@ const formCreateHandler = (evt) => {
   popupAddOpenToggle();
 };
 
+const handleDeleteCard = (evt) => {
+  evt.target.closest('.element').remove();
+};
+
+const handleLikeOnCard = (evt) => {
+  evt.target.closest('.element').classList.toggle('element__button_active');
+};
+
 //Генерация карточки
 
 const generateCard = (cardItem) => {
@@ -67,26 +75,33 @@ const generateCard = (cardItem) => {
   imageCard.src = cardItem.link;
   imageCard.alt = cardItem.name;
 
+  const deleteButton = newCard.querySelector('.element__delete');
+  deleteButton.addEventListener('click', handleDeleteCard);
+
+  const likeOnCard = newCard.querySelector('.element__button');
+  likeOnCard.addEventListener('click', handleLikeOnCard);
+
   return newCard;
-}
+};
 
 //Рендер карточки
 
 const renderCard = (cardItem) => {
   cardContainer.prepend(generateCard(cardItem));
-}
+};
 
 initialCards.forEach((cardItem) => {
     renderCard(cardItem);
 });
 
+//Открытие и закрытие попапа добавления места
+
 function popupAddOpenToggle() {
     popupAddCard.classList.toggle('popup_opened');
-}
+};
 
 profileAddButton.addEventListener('click', popupAddOpenToggle);
 popupAddCloseButton.addEventListener('click', popupAddOpenToggle);
 
 
 formAddCard.addEventListener('submit', formCreateHandler);
- 

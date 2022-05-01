@@ -9,7 +9,7 @@ function popupProfileOpenToggle() {
         nameInput.value = userName.textContent;
         jobInput.value = userMetier.textContent;
     }
-}
+};
 
 //function popupOvarlayClickHandler(evt) {
 //    if (evt.target === evt.currentTarget) {
@@ -44,6 +44,3 @@ function formSubmitHandler (evt) {
 };
 
 formProfile.addEventListener('submit', formSubmitHandler);
-
-//попап добавления места
-

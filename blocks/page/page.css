@@ -10,14 +10,3 @@
     -moz-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
 }
-
-/*.page > .popup {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.5s linear;
-}
-
-/*.page:focus > .popup {
-    visibility: visible;
-    opacity: 1;
-}

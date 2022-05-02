@@ -32,14 +32,3 @@
         background-image: url(../../../images/Vector\(2\).png);
     }
 }
-
-.profile__add-button > .popup {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.5s linear;
-}
-
-.profile__add-button:active > .popup {
-    visibility: visible;
-    opacity: 1;
-}

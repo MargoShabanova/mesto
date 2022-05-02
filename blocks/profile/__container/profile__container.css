@@ -1,7 +1,13 @@
 .profile__container {
+<<<<<<< HEAD
     display: flex;
 }
 
+=======
+        display: flex;
+}
+    
+>>>>>>> Develop
 @media (max-width: 700px) {
     .profile__container {
         flex-direction: column;

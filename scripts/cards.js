@@ -38,7 +38,7 @@ const profileAddButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_add');
 const popupAddCloseButton = document.querySelector('.popup__close-cards');
 
-const popupPlace = document.querySelector('.popup__open-card');
+const popupPlace = document.querySelector('.popup_open-card');
 const popupPlaceCloseButton = document.querySelector('.popup__close_image');
 const popupImage = document.querySelector('.popup__image');
 

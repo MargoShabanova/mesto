@@ -23,9 +23,6 @@ const initialCards = [
       name: 'Байкал',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
-<<<<<<< HEAD
-  ];
-=======
   ];
 
 //Шаблоны
@@ -127,4 +124,3 @@ popupPlaceCloseButton.addEventListener('click', popupPictureOpenToggle);
 
 
 formAddCard.addEventListener('submit', formCreateHandler);
->>>>>>> Develop

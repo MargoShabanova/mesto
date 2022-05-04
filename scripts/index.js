@@ -1,5 +1,5 @@
 //ДОМ элементы
-const popup = document.querySelector('.popup');
+
 //Попап редактирования профиля
 const profileEditButton = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.popup_profile');
@@ -47,12 +47,11 @@ function closePopup (popup) {
 
 //Редактирование профиля
 function openPropfilePopup () {
-    if (popup.classList.contains('popup_opened')) {
-        nameInput.value = userName.textContent;
-        jobInput.value = userMetier.textContent;
-    }
 
-    openPopup();
+    nameInput.value = userName.textContent;
+    jobInput.value = userMetier.textContent;
+
+    openPopup(popupProfile);
 };
 
 //Добавление карточек
@@ -93,6 +92,7 @@ const handleFormCreate = (evt) => {
   evt.preventDefault();
 
   renderCard({ link: inputPicture.value, name: inputPlaceName.value });
+
   inputPicture.value = '';
   inputPlaceName.value = '';
 
@@ -125,12 +125,13 @@ const generateCard = (cardItem) => {
     evt.target.classList.toggle('element__button_active');
   });
 
-  imageCard.addEventListener('click', (evt) => {
-    popupImage.src = evt.target.src;
-    popupImage.alt = evt.target.alt;
-    openPopup(popupPlace);
+  imageCard.addEventListener('click', () => {
 
-    popupImageTitle.textContent = evt.target.alt;
+    popupImage.src = cardItem.link;
+    popupImage.alt = cardItem.name;
+    popupImageTitle.textContent = cardItem.name;
+
+    openPopup(popupPlace);
   });
 
   return newCard;

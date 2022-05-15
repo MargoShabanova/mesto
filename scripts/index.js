@@ -1,5 +1,5 @@
 //ДОМ элементы
-
+const popup = document.querySelectorAll('.popup');
 //Попап редактирования профиля
 const profileEditButton = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.popup_profile');
@@ -137,6 +137,14 @@ const generateCard = (cardItem) => {
   return newCard;
 };
 
+function popupOvarlayClickHandler(evt) {
+  if (evt.target === evt.currentTarget) {
+    closePopup();
+  }
+};
+
+popup.addEventListener('click', popupOvarlayClickHandler);
+
 //Рендер карточки
 
 const renderCard = (cardItem) => {
@@ -146,3 +154,4 @@ const renderCard = (cardItem) => {
 initialCards.forEach((cardItem) => {
     renderCard(cardItem);
 });
+

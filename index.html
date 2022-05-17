@@ -37,11 +37,13 @@
     <div class="popup popup_profile">
       <div class="popup__container">
       <button class="popup__close popup__close-profile"></button>
-      <form class="form form_profile" name="edit-profile">
+      <form class="form form_profile" name="edit-profile" novalidate>
         <h2 class="form__title">Редактировать профиль</h2>
         <fieldset class="form__container">
-          <input type="text" class="form__item form__item_type_name" placeholder="Имя">
-          <input type="text" class="form__item form__item_type_metier" placeholder="О себе">
+          <input id="name-input" type="text" class="form__item form__item_type_name" placeholder="Имя" required minlength="2" maxlength="40">
+          <span class="name-input-error form__item-error"></span>
+          <input id="metier-input" type="text" class="form__item form__item_type_metier" placeholder="О себе" required minlength="2" max="200">
+          <span class="metier-input-error form__item-error"></span>
           <button type="submit" class="form__submit form__submit_save">Сохранить</button>
         </fieldset> 
       </form>
@@ -51,11 +53,13 @@
 	  <div class="popup popup_add">
       <div class="popup__container">
       <button class="popup__close popup__close-cards"></button>
-      <form class="form form_add-card" name="add-image">
+      <form class="form form_add-card" name="add-image" novalidate>
         <h2 class="form__title">Новое место</h2>
         <fieldset class="form__container">
-          <input type="text" class="form__item form__item_place-name" placeholder="Название">
-          <input type="url" class="form__item form__item_picture-link" placeholder="Ссылка на картинку">
+          <input id="place-name-input" type="text" class="form__item form__item_place-name" placeholder="Название" required minlength="2" maxlength="30">
+          <span class="place-name-input-error form__item-error"></span>
+          <input id="place-url" type="url" class="form__item form__item_picture-link" placeholder="Ссылка на картинку" required>
+          <span class="place-url-error form__item-error"></span>
           <button type="submit" class="form__submit form__submit_create">Создать</button>
         </fieldset> 
       </form>
@@ -81,6 +85,7 @@
       </li>
     </template>
       
+    <script src="./scripts/validate.js"></script>
 	  <script src="./scripts/cards.js"></script>
     <script src="./scripts/index.js"></script>
 

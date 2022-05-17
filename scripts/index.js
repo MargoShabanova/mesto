@@ -40,10 +40,27 @@ const placeImage = document.querySelector('.element__photo');
 //Открытие/закрытие попапов
 function openPopup (popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', handlePressEscape);
 };
 
 function closePopup (popup) {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', handlePressEscape);
+};
+
+popups.forEach ((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+    if(evt.target.classList.contains('popup_opened')){
+      closePopup(popup);
+    };
+  });
+});
+
+const handlePressEscape = (evt) => {
+  if(evt.key === "Escape") {
+    const popupCurrent = document.querySelector('.popup_opened');
+    closePopup(popupCurrent);
+  };
 };
 
 //Редактирование профиля

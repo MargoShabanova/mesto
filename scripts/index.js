@@ -1,5 +1,6 @@
 //ДОМ элементы
-const popup = document.querySelectorAll('.popup');
+const popups = document.querySelectorAll('.popup');
+
 //Попап редактирования профиля
 const profileEditButton = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.popup_profile');
@@ -74,7 +75,7 @@ const cardTemplate = document.querySelector('#initial-template').content.querySe
 //Редактирование профиля
 function handleFormSubmit (evt) {
     evt.preventDefault();
- 
+
     userName.textContent = nameInput.value;
     userMetier.textContent = jobInput.value;
  
@@ -137,14 +138,6 @@ const generateCard = (cardItem) => {
   return newCard;
 };
 
-function popupOvarlayClickHandler(evt) {
-  if (evt.target === evt.currentTarget) {
-    closePopup();
-  }
-};
-
-popup.addEventListener('click', popupOvarlayClickHandler);
-
 //Рендер карточки
 
 const renderCard = (cardItem) => {
@@ -154,4 +147,3 @@ const renderCard = (cardItem) => {
 initialCards.forEach((cardItem) => {
     renderCard(cardItem);
 });
-

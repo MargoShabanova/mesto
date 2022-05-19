@@ -70,9 +70,6 @@ function openPropfilePopup () {
   nameInput.value = userName.textContent;
   jobInput.value = userMetier.textContent;
 
-  const profileSubmit = document.querySelector('.form__submit_save');
-  profileSubmit.classList.remove('form__submit_inactive');
-
   openPopup(popupProfile);
 };
 
@@ -109,11 +106,8 @@ const handleFormCreate = (evt) => {
 
   evt.target.reset();
 
-  const addPictureButton = document.querySelector('.form__submit_create');
-  if (inputPicture.value === '' || inputPlaceName.value === '') {
-    addPictureButton.classList.add('form__submit_inactive');
-    addPictureButton.disabled = true;
-  };
+  evt.submitter.classList.add('form__submit_inactive');
+  evt.submitter.disabled = true;
 
   closePopup(popupAddCard);
 };

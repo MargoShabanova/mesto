@@ -1,3 +1,33 @@
+import {Card} from './Card.js';
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+
 //ДОМ элементы
 
 const popups = document.querySelectorAll('.popup');
@@ -29,8 +59,8 @@ const popupPlace = document.querySelector('.popup_open-card');
 const popupImage = document.querySelector('.popup__image');
 const popupImageTitle = document.querySelector('.popup__image-title');
 
-const placeName = document.querySelector('.element__name');
-const placeImage = document.querySelector('.element__photo');
+//const placeName = document.querySelector('.element__name');
+//const placeImage = document.querySelector('.element__photo');
 
 
 //Функции:
@@ -44,6 +74,15 @@ function openPopup (popup) {
 function closePopup (popup) {
     popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', handlePressEscape);
+};
+
+//Установка фото и названия в попап с картинкой
+function handleCardClick(name, link) {
+  popupImage.src = link;
+  popupImage.alt = name;
+  popupImageTitle.textContent = name;
+
+  openPopup(popupPlace);
 };
 
 popups.forEach ((popup) => {
@@ -72,6 +111,13 @@ function openPropfilePopup () {
 
   openPopup(popupProfile);
 };
+
+//Рендер карточек
+initialCards.forEach((data) => {
+  const card = new Card(data, '#initial-template', handleCardClick)
+  const cardElement = card.generateCard();
+  cardContainer.prepend(cardElement);
+});
 
 
 //Шаблоны
@@ -102,7 +148,8 @@ profileAddButton.addEventListener('click', () => openPopup(popupAddCard));
 const handleFormCreate = (evt) => {
   evt.preventDefault();
 
-  renderCard({ link: inputPicture.value, name: inputPlaceName.value });
+  const card = renderCard({ link: inputPicture.value, name: inputPlaceName.value });
+  cardContainer.prepend(card.generateCard());
 
   evt.target.reset();
 
@@ -112,48 +159,51 @@ const handleFormCreate = (evt) => {
   closePopup(popupAddCard);
 };
 
-//Удаление карточек
-const handleDeleteCard = (evt) => {
-  evt.target.closest('.element').remove();
-};
-
 formAddCard.addEventListener('submit', handleFormCreate);
+
+//Удаление карточек
+//const handleDeleteCard = (evt) => {
+//  evt.target.closest('.element').remove();
+//};
+
 
 //Генерация карточки
 
-const generateCard = (cardItem) => {
-  const newCard = cardTemplate.cloneNode(true);
+//const generateCard = (cardItem) => {
+//  const newCard = cardTemplate.cloneNode(true);
 
-  const nameCard = newCard.querySelector('.element__name');
-  const imageCard = newCard.querySelector('.element__photo');
+//  const nameCard = newCard.querySelector('.element__name');
+//  const imageCard = newCard.querySelector('.element__photo');
 
-  nameCard.textContent = cardItem.name;
-  imageCard.src = cardItem.link;
-  imageCard.alt = cardItem.name;
+//  nameCard.textContent = cardItem.name;
+//  imageCard.src = cardItem.link;
+//  imageCard.alt = cardItem.name;
 
-  const deleteButton = newCard.querySelector('.element__delete');
-  deleteButton.addEventListener('click', handleDeleteCard);
+//  const deleteButton = newCard.querySelector('.element__delete');
+//  deleteButton.addEventListener('click', handleDeleteCard);
 
-  newCard.querySelector('.element__button').addEventListener('click', function(evt){
-    evt.target.classList.toggle('element__button_active');
-  });
+//  newCard.querySelector('.element__button').addEventListener('click', function(evt){
+//    evt.target.classList.toggle('element__button_active');
+//  });
 
-  imageCard.addEventListener('click', () => {
+//  imageCard.addEventListener('click', () => {
 
-    popupImage.src = cardItem.link;
-    popupImage.alt = cardItem.name;
-    popupImageTitle.textContent = cardItem.name;
+//    popupImage.src = cardItem.link;
+//    popupImage.alt = cardItem.name;
+//    popupImageTitle.textContent = cardItem.name;
 
-    openPopup(popupPlace);
-  });
+//    openPopup(popupPlace);
+//  });
 
-  return newCard;
-};
+//  return newCard;
+//};
 
 //Рендер карточки
 
-const renderCard = (cardItem) => {
-  cardContainer.prepend(generateCard(cardItem));
-};
+//const renderCard = (cardItem) => {
+//  cardContainer.prepend(generateCard(cardItem));
+//};
 
-initialCards.forEach(renderCard);
+//initialCards.forEach(renderCard);
+
+

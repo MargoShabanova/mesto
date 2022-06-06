@@ -1,3 +1,10 @@
+export class FormValidator {
+  constructor() {
+    
+  }
+  
+}
+
 // Функция, которая добавляет класс с ошибкой
 const showInputError = (formElement, inputElement, errorMessage, object) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);

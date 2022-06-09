@@ -1,5 +1,5 @@
 import { Card } from './Card.js';
-import { validationConfig, FormValidator } from './FormValidator.js';
+import { FormValidator } from './FormValidator.js';
 
 // Данные исходных карточек
 const initialCards = [
@@ -27,7 +27,16 @@ const initialCards = [
     name: 'Байкал',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
-]; 
+];
+
+const validationConfig = {
+  formSelector: '.form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__submit',
+  inactiveButtonClass: 'form__submit_inactive',
+  inputErrorClass: 'form__item_type_error',
+  errorClass: 'form__item-error_active'
+};
 
 // ДОМ элементы
 

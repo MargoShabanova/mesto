@@ -98,10 +98,7 @@ function handleCardClick(name, link) {
 
 popups.forEach ((popup) => {
   popup.addEventListener('mousedown', (evt) => {
-    if(evt.target.classList.contains('popup_opened')){
-      closePopup(popup);
-    };
-    if(evt.target.classList.contains('popup__close')){
+    if(evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close')){
       closePopup(popup);
     };
   });
@@ -127,8 +124,15 @@ function openPropfilePopup () {
 // Новая карточка
 function generateCard(data) {
   const card = new Card(data, '#initial-template', handleCardClick);
-  return card;
+  const cardElement = card.generateCard();
+  return cardElement;
 };
+
+// Рендер карточек
+initialCards.forEach((item) => {
+  const card = generateCard(item);
+  cardContainer.prepend(card);
+});
 
 // Валидация
 validateEditProfile.enableValidation();
@@ -157,31 +161,26 @@ formProfile.addEventListener('submit', handleProfileFormSubmit);
 
 profileEditButton.addEventListener('click', () => openPropfilePopup());
 
-// Рендер карточек
-initialCards.forEach((data) => {
-  const card = generateCard(data);
-  cardContainer.prepend(card.generateCard());
-});
 
 // Добавление карточек
 profileAddButton.addEventListener('click', () => openPopup(popupAddCard));
 
 
 const handleFormCreate = (evt) => {
-  evt.preventDefault();
 
   const card = generateCard({
     name: inputPlaceName.value,
     link: inputPicture.value
   });
 
-  cardContainer.prepend(card.generateCard());
+  
+  cardContainer.prepend(card);
 
   evt.target.reset();
 
   evt.submitter.classList.add('form__submit_inactive');
   evt.submitter.disabled = true;
-
+  
   closePopup(popupAddCard);
 };
 

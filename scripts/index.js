@@ -178,55 +178,15 @@ const handleFormCreate = (evt) => {
 
   evt.target.reset();
 
-  evt.submitter.classList.add('form__submit_inactive');
-  evt.submitter.disabled = true;
+  //evt.submitter.disabled = true;
   
   closePopup(popupAddCard);
 };
 
 formAddCard.addEventListener('submit', handleFormCreate);
 
-//Удаление карточек
-//const handleDeleteCard = (evt) => {
-//  evt.target.closest('.element').remove();
-//};
-
-
-//Генерация карточки
-
-//const generateCard = (cardItem) => {
-//  const newCard = cardTemplate.cloneNode(true);
-
-//  const nameCard = newCard.querySelector('.element__name');
-//  const imageCard = newCard.querySelector('.element__photo');
-
-//  nameCard.textContent = cardItem.name;
-//  imageCard.src = cardItem.link;
-//  imageCard.alt = cardItem.name;
-
-//  const deleteButton = newCard.querySelector('.element__delete');
-//  deleteButton.addEventListener('click', handleDeleteCard);
-
-//  newCard.querySelector('.element__button').addEventListener('click', function(evt){
-//    evt.target.classList.toggle('element__button_active');
-//  });
-
-//  imageCard.addEventListener('click', () => {
-
-//    popupImage.src = cardItem.link;
-//    popupImage.alt = cardItem.name;
-//    popupImageTitle.textContent = cardItem.name;
-
-//    openPopup(popupPlace);
-//  });
-
-//  return newCard;
-//};
-
-//Рендер карточки
-
-//const renderCard = (cardItem) => {
-//  cardContainer.prepend(generateCard(cardItem));
-//};
-
-//initialCards.forEach(renderCard);
+// Сброс валидации при открытии попапа
+profileAddButton.addEventListener('click', () => {
+  validateAddCard.resetValidation();
+  openPopup(popupAddCard);
+});

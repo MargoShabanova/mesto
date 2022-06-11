@@ -53,6 +53,11 @@ export class FormValidator {
     }
   }
 
+  buttonDisabled() {
+    this._buttonElement.classList.add(this._inactiveButtonClass);
+    this._buttonElement.disabled = true;
+  }
+
   _setEventListeners() {
 
     //const inputList = Array.from(formElement.querySelectorAll(object.inputSelector));

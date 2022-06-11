@@ -31,13 +31,13 @@ export class Card {
     return this._element;
   }
 
-  _handleDeleteCard(evt) {
-    evt.target.closest('.element').remove();
+  _handleDeleteCard() {
+    this._element.remove(); 
     this._element = null;
   }
 
-  _handleLikeCard(evt) {
-    evt.target.classList.toggle('element__button_active');
+  _handleLikeCard() {
+    this._like.classList.toggle('element__button_active');
   }
 
   _setEventListeners() {
@@ -45,8 +45,8 @@ export class Card {
       this._handleCardClick(this._name, this._link);
     });
 
-    this._delete.addEventListener('click', this._handleDeleteCard);
+    this._delete.addEventListener('click', () => this._handleDeleteCard()); 
 
-    this._like.addEventListener('click', this._handleLikeCard);
+    this._like.addEventListener('click', () => this._handleLikeCard());
   }
 }

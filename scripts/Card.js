@@ -31,29 +31,22 @@ export class Card {
     return this._element;
   }
 
-  //_handleClosePicture() {
-  //  closePopup (popupPlace);
-  //}
+  _handleDeleteCard() {
+    this._element.remove(); 
+    this._element = null;
+  }
 
-  //_handleDeleteCard(evt) {
-  //  evt.target.closest('.element').remove();
-  //}
-
-  //_handleLikeCard(evt) {
-  //  evt.target.classList.toggle('element__button_active');
-  //}
+  _handleLikeCard() {
+    this._like.classList.toggle('element__button_active');
+  }
 
   _setEventListeners() {
     this._placeImage.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
     });
 
-    this._delete.addEventListener('click', () => {
-      this._element.remove();
-    });
+    this._delete.addEventListener('click', () => this._handleDeleteCard()); 
 
-    this._like.addEventListener('click', () => {
-      this._like.classList.toggle('element__button_active');
-    });
+    this._like.addEventListener('click', () => this._handleLikeCard());
   }
 }

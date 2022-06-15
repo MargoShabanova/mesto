@@ -1,5 +1,6 @@
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
+import  Section  from './Section.js';
 
 // Данные исходных карточек
 const initialCards = [
@@ -128,11 +129,23 @@ function generateCard(data) {
   return cardElement;
 };
 
+const cardsList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const cardElement = generateCard(item);
+    cardsList.addItem(cardElement);
+  },
+},
+'.elements__list'
+);
+
+cardsList.renderItems();
+
 // Рендер карточек
-initialCards.forEach((item) => {
-  const card = generateCard(item);
-  cardContainer.prepend(card);
-});
+//initialCards.forEach((item) => {
+//  const card = generateCard(item);
+//  cardContainer.prepend(card);
+//});
 
 // Валидация
 validateEditProfile.enableValidation();

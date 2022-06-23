@@ -9,7 +9,7 @@
     box-shadow: none;
     border: 2px solid #fff;
     border-radius: 2px;
-    background-image: url(../../../images/Vector\(s\).png);
+    background-image: url(../../../images/Vector-s.png);
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -29,6 +29,6 @@
 @media (max-width: 425px) {
     .profile__add-button {
         width: 282px;
-        background-image: url(../../../images/Vector\(m\).png);
+        background-image: url(../../../images/Vector-m.png);
     }
 }

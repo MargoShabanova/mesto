@@ -31,12 +31,12 @@ export const initialCards = [
 // Попап редактирования профиля
 export const profileEditButton = document.querySelector('.profile__edit-button');
 
-export const formProfile = document.querySelector('.form_profile');
+export const formProfile = document.querySelector('.form_type_profile-edit');
 
 export const nameInput = document.querySelector('.form__item_type_name');
 export const jobInput = document.querySelector('.form__item_type_metier');
 
 // Попап добавления карточек
 
-export const formAddCard = document.querySelector('.form_add-card');
+export const formAddCard = document.querySelector('.form_type_add-card');
 export const profileAddButton = document.querySelector('.profile__add-button');

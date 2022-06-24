@@ -1,4 +1,4 @@
-import './pages/index.css';
+import './index.css';
 import {
   initialCards,
   profileEditButton,
@@ -7,13 +7,13 @@ import {
   jobInput,
   formAddCard,
   profileAddButton
-} from './utils/constants.js';
-import { Card } from './components/Card.js';
-import { FormValidator } from './components/FormValidator.js';
-import  Section  from './components/Section.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import UserInfo from './components/UserInfo.js';
+} from '../utils/constants.js';
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
+import  Section  from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
 
 const validationConfig = {
@@ -44,11 +44,7 @@ const handleProfileFormSubmit = (data) => {
 // Сабмит добавления карточек
 
 const handleFormCreate = (data) => {
-
-  const card = generateCard({
-    name: data['place-name'],
-    link: data.link
-  });
+  const card = generateCard(data);
   
   section.addItem(card);
   popupAddCard.close();
@@ -61,9 +57,13 @@ profileEditButton.addEventListener('click', () => {
   jobInput.value = data.job;
 
   popupProfile.open();
+  validateEditProfile.resetValidation();
 });
 
-profileAddButton.addEventListener('click', () => popupAddCard.open());
+profileAddButton.addEventListener('click', () => {
+  popupAddCard.open();
+  validateAddCard.resetValidation();
+});
 
 // Валидация
 const validateEditProfile = new FormValidator(validationConfig, formProfile);
@@ -71,17 +71,11 @@ const validateAddCard = new FormValidator(validationConfig, formAddCard);
 validateEditProfile.enableValidation();
 validateAddCard.enableValidation();
 
-// Сброс валидации при открытии попапа
-profileAddButton.addEventListener('click', () => {
-  validateAddCard.resetValidation();
-  popupAddCard.open();
-});
 
 // Новая карточка
 function generateCard(data) {
   const card = new Card(data, '#initial-template', handleCardClick);
-  const cardElement = card.generateCard();
-  return cardElement;
+  return card.generateCard();
 };
 
 const section = new Section({
@@ -96,14 +90,14 @@ const section = new Section({
 
 section.renderItems();
 
-const imagePopup = new PopupWithImage('.popup_open-card');
+const imagePopup = new PopupWithImage('.popup_type_open-card');
 imagePopup.setEventListeners();
 
-const popupAddCard = new PopupWithForm('.popup_add', handleFormCreate);
+const popupAddCard = new PopupWithForm('.popup_type_add-card', handleFormCreate);
 popupAddCard.setEventListeners();
 
 
-const popupProfile = new PopupWithForm('.popup_profile', handleProfileFormSubmit);
+const popupProfile = new PopupWithForm('.popup_type_profile-edit', handleProfileFormSubmit);
 popupProfile.setEventListeners();
 
 const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__metier' });

@@ -12,13 +12,11 @@ export class Card {
   }
 
   _getTemplate() {
-    const element = document
-    .querySelector(this._cardSelector)
-    .content
-    .querySelector('.element')
-    .cloneNode(true);
-
-    return element;
+    return document
+      .querySelector(this._cardSelector)
+      .content
+      .querySelector('.element')
+      .cloneNode(true);
   }
 
   generateCard() {

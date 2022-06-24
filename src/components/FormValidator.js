@@ -36,7 +36,7 @@ export class FormValidator {
     };
   }
 
-  _hasInvalidInput(inputList) {
+  _hasInvalidInput() {
     return this._inputList.some((inputElement) => {
         return !inputElement.validity.valid;
     });
@@ -63,6 +63,9 @@ export class FormValidator {
         this._toggleButtonState ();
       });
     });
+    this._form.addEventListener('reset', () => {
+      this.resetValidation();
+    })
   }
 
   resetValidation() {

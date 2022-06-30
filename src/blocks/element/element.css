@@ -1,5 +1,6 @@
 .element {
     margin: 0;
+    width: 282px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;

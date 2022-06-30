@@ -14,6 +14,26 @@ import  Section  from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import { api } from '../components/Api';
+
+api.getProfile()
+  .then(res => {
+    //console.log('ответ', res)
+    userInfo.setUserInfo(res.name, res.about)
+  })
+
+api.getInitialCards()
+  .then(cardList => {
+    cardList.forEach(data => {
+      //const card = generateCard(data);
+      const card = generateCard({
+        name: data.name,
+        link: data.link,
+        likes: data.likes
+      });
+      section.addItem(card)
+    });
+  })
 
 
 const validationConfig = {
@@ -34,20 +54,29 @@ function handleCardClick(name, link) {
 
 // Сабмит формы профиля
 const handleProfileFormSubmit = (data) => {
-
   const { name, description } = data;
-  userInfo.setUserInfo(name,description);
 
-  popupProfile.close();
+  api.editProfile(name, description)
+    .then(() => {
+      userInfo.setUserInfo(name,description)
+      popupProfile.close()
+    })
+
 };
 
 // Сабмит добавления карточек
 
 const handleFormCreate = (data) => {
-  const card = generateCard(data);
-  
-  section.addItem(card);
-  popupAddCard.close();
+  api.addCard(data.name, data.link)
+    .then(res => {
+      const card = generateCard({
+        name: res.name,
+        link: res.link,
+        likes: res.likes
+      })
+      section.addItem(card);
+      popupAddCard.close();
+    })
 };
 
 // Клик на кнопку редактирования профиля
@@ -79,7 +108,7 @@ function generateCard(data) {
 };
 
 const section = new Section({
-  items: initialCards,
+  items: [],
   renderer: (item) => {
     const cardElement = generateCard(item);
     section.addItem(cardElement);

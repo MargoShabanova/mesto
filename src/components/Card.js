@@ -2,6 +2,7 @@ export class Card {
   constructor(data, cardSelector, handleCardClick) {
     this._link = data.link;
     this._name = data.name;
+    this._likes = data.likes;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._element = this._getTemplate();
@@ -19,10 +20,18 @@ export class Card {
       .cloneNode(true);
   }
 
+  _setLikes() {
+    const likeCount = this._element.querySelector('.element__like-count');
+    //likeCount.textContent = this._likes.lenght;
+    likeCount.textContent = '0';
+  }
+
   generateCard() {
     this._placeImage.src = this._link;
     this._placeImage.alt = this._name;
     this._placeName.textContent = this._name;
+
+    this._setLikes();
 
     this._setEventListeners();
 

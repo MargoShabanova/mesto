@@ -1,10 +1,11 @@
 export class Card {
-  constructor(data, cardSelector, handleCardClick) {
+  constructor(data, cardSelector, handleCardClick, handleDeleteClick) {
     this._link = data.link;
     this._name = data.name;
     this._likes = data.likes;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteClick = handleDeleteClick;
     this._element = this._getTemplate();
     this._placeImage = this._element.querySelector('.element__photo');
     this._placeName = this._element.querySelector('.element__name');
@@ -20,11 +21,6 @@ export class Card {
       .cloneNode(true);
   }
 
-  _setLikes() {
-    const likeCount = this._element.querySelector('.element__like-count');
-    likeCount.textContent = this._likes.lenght;
-  }
-
   generateCard() {
     this._placeImage.src = this._link;
     this._placeImage.alt = this._name;
@@ -37,10 +33,15 @@ export class Card {
     return this._element;
   }
 
-  _handleDeleteCard() {
-    this._element.remove(); 
-    this._element = null;
+  _setLikes() {
+    const likeCount = this._element.querySelector('.element__like-count');
+    likeCount.textContent = this._likes.length;
   }
+
+  //_handleDeleteCard() {
+  //  this._element.remove(); 
+  //  this._element = null;
+  //}
 
   _handleLikeCard() {
     this._like.classList.toggle('element__button_active');
@@ -51,7 +52,7 @@ export class Card {
       this._handleCardClick(this._name, this._link);
     });
 
-    this._delete.addEventListener('click', () => this._handleDeleteCard()); 
+    this._delete.addEventListener('click', () => this._handleDeleteClick()); 
 
     this._like.addEventListener('click', () => this._handleLikeCard());
   }

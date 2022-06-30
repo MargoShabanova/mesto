@@ -102,8 +102,17 @@ validateAddCard.enableValidation();
 
 
 // Новая карточка
-function generateCard(data) {
-  const card = new Card(data, '#initial-template', handleCardClick);
+const generateCard = (data) => {
+  const card = new Card(
+    data,
+    '#initial-template',
+    handleCardClick,
+    () => {
+      //console.log('clicked button');
+      confirmPopup.open()
+    }
+  );
+    
   return card.generateCard();
 };
 
@@ -128,5 +137,10 @@ popupAddCard.setEventListeners();
 
 const popupProfile = new PopupWithForm('.popup_type_profile-edit', handleProfileFormSubmit);
 popupProfile.setEventListeners();
+
+const confirmPopup = new PopupWithForm('.popup_type_delete-confirm', () => {
+  console.log('delete');
+});
+confirmPopup.setEventListeners();
 
 const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__metier' });

@@ -22,8 +22,7 @@ export class Card {
 
   _setLikes() {
     const likeCount = this._element.querySelector('.element__like-count');
-    //likeCount.textContent = this._likes.lenght;
-    likeCount.textContent = '0';
+    likeCount.textContent = this._likes.lenght;
   }
 
   generateCard() {

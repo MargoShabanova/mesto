@@ -16,20 +16,27 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import { api } from '../components/Api';
 
+let userId
 api.getProfile()
   .then(res => {
-    //console.log('ответ', res)
+    console.log('ответ', res)
     userInfo.setUserInfo(res.name, res.about)
+
+    userId = res._id
   })
 
 api.getInitialCards()
   .then(cardList => {
+    console.log('cardList', cardList)
     cardList.forEach(data => {
       //const card = generateCard(data);
       const card = generateCard({
         name: data.name,
         link: data.link,
-        likes: data.likes
+        likes: data.likes,
+        id: data._id,
+        userId: userId,
+        ownerId: data.owner._id
       });
       section.addItem(card)
     });
@@ -72,7 +79,10 @@ const handleFormCreate = (data) => {
       const card = generateCard({
         name: res.name,
         link: res.link,
-        likes: res.likes
+        likes: res.likes,
+        id: res._id,
+        userId: userId,
+        ownerId: res.owner._id
       })
       section.addItem(card);
       popupAddCard.close();
@@ -107,9 +117,17 @@ const generateCard = (data) => {
     data,
     '#initial-template',
     handleCardClick,
-    () => {
+    (id) => {
       //console.log('clicked button');
-      confirmPopup.open()
+      confirmPopup.open();
+      confirmPopup.changeSubmitHandler(() => {
+        api.deleteCard(id)
+        .then(res => {
+          card.deleteCard()
+          confirmPopup.close()
+
+        })
+      })
     }
   );
     
@@ -138,9 +156,7 @@ popupAddCard.setEventListeners();
 const popupProfile = new PopupWithForm('.popup_type_profile-edit', handleProfileFormSubmit);
 popupProfile.setEventListeners();
 
-const confirmPopup = new PopupWithForm('.popup_type_delete-confirm', () => {
-  console.log('delete');
-});
+const confirmPopup = new PopupWithForm('.popup_type_delete-confirm');
 confirmPopup.setEventListeners();
 
 const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__metier' });

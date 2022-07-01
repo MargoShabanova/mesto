@@ -45,6 +45,15 @@
         .then(res => res.ok ? res.json() : Promise.reject(res.status))
         .catch(console.log)
     }
+
+    deleteCard(id) {
+        return fetch(`${this._baseUrl}/cards/${id}`, {
+            method: "DELETE",
+            headers: this._headers
+        })
+        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .catch(console.log)
+    }
   }
   
   export const api = new Api({

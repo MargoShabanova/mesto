@@ -128,6 +128,19 @@ const generateCard = (data) => {
 
         })
       })
+    },
+    (id) => {
+      if(card.isLiked()) {
+        api.deleteLike(id)
+        .then(res => {
+          card.setLikes(res.likes)
+        })
+      }else{
+        api.addLike(id)
+        .then(res => {
+          card.setLikes(res.likes)
+        })
+      }
     }
   );
     

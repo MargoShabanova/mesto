@@ -62,8 +62,9 @@ function handleCardClick(name, link) {
 
 // Клик на аватар
 userAvatar.addEventListener('click', () => {
-  popupAvatar.open();
+  
   validateUserAvatar.resetValidation();
+  popupAvatar.open();
 })
 
 // Клик на кнопку редактирования профиля
@@ -110,7 +111,7 @@ const handleAvatarFormSubmit = (values) => {
       .finally(() => {
         popupAvatar.renderLoading(false);
       })
-}
+};
 
 // Сабмит добавления карточек
 const handleFormCreate = (data) => {

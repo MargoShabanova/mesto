@@ -13,11 +13,13 @@
   	<main>
   		<section class="profile">
         <div class="profile__container">
-  			  <img class="profile__avatar" src="<%=require('./images/image.jpg')%>" alt="фото пользователя">
+  			  <div class="profile__avatar-button">
+            <img class="profile__avatar" src="<%=require('./images/image.jpg')%>" alt="фото пользователя">
+          </div>
   			  <div class="profile__info">
-  				  <h1 class="profile__name"></h1>
+  				  <h1 class="profile__name">User name</h1>
   				  <button class="profile__edit-button" type="button"></button>
-  				  <p class="profile__metier"></p>
+  				  <p class="profile__metier">About user</p>
   			  </div>
         </div>
   			<button class="profile__add-button" type="button"></button>
@@ -81,7 +83,7 @@
         <form class="form form_type_avatar-edit" name="avatar" novalidate>
           <h2 class="form__title">Обновить аватар</h2>
           <fieldset class="form__container">
-            <input id="avatar-input" name="avatar-url" type="url" class="form__item form__item_avatar-link" placeholder="Ссылка на картинку">
+            <input id="avatar-input" name="avatar-url" type="url" class="form__item form__item_avatar-link" placeholder="Ссылка на картинку" required>
             <span class="avatar-input-error form__item-error"></span>
             <button type="submit" class="form__submit form__submit_edit">Сохранить</button>
           </fieldset> 

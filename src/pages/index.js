@@ -15,7 +15,7 @@ import { FormValidator } from '../components/FormValidator.js';
 import  Section  from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
-//import PopupWithConfirmation from '../components/ PopupWithConfirmation.js';
+import PopupWithConfirmation from '../components/ PopupWithConfirmation.js';
 import UserInfo from '../components/UserInfo.js';
 import { api } from '../components/Api';
 
@@ -61,11 +61,10 @@ function handleCardClick(name, link) {
 // Обработчики событий:
 
 // Клик на аватар
-userAvatar.addEventListener('click', () => {
-  
-  validateUserAvatar.resetValidation();
+function handleAvatarClick() {
   popupAvatar.open();
-})
+  validateUserAvatar.resetValidation();
+}
 
 // Клик на кнопку редактирования профиля
 profileEditButton.addEventListener('click', () => {
@@ -111,7 +110,7 @@ const handleAvatarFormSubmit = (values) => {
       .finally(() => {
         popupAvatar.renderLoading(false);
       })
-};
+}
 
 // Сабмит добавления карточек
 const handleFormCreate = (data) => {
@@ -193,7 +192,7 @@ popupAddCard.setEventListeners();
 const popupProfile = new PopupWithForm('.popup_type_profile-edit', handleProfileFormSubmit);
 popupProfile.setEventListeners();
 
-const confirmPopup = new PopupWithForm('.popup_type_delete-confirm');
+const confirmPopup = new PopupWithConfirmation('.popup_type_delete-confirm');
 confirmPopup.setEventListeners();
 
 const popupAvatar = new PopupWithForm('.popup_type_avatar-edit', handleAvatarFormSubmit);
@@ -202,7 +201,7 @@ popupAvatar.setEventListeners();
 //const popupWithConfirmation = new PopupWithConfirmation();
 
 
-const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__metier', profileAvatarSelector: '.profile__avatar' });
+const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__metier', profileAvatarSelector: '.profile__avatar' }, handleAvatarClick);
 
 // Валидация
 const validateEditProfile = new FormValidator(validationConfig, formProfile);
@@ -211,3 +210,13 @@ const validateUserAvatar = new FormValidator(validationConfig, formUserAvatar);
 validateEditProfile.enableValidation();
 validateAddCard.enableValidation();
 validateUserAvatar.enableValidation();
+
+Promise.all([api.getProfile(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userId = userData._id;
+    userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
+    cards.reverse();
+    section.renderItems(cards);
+  })
+  .catch((err) => 
+  console.log('Ошибка: ${err}'));

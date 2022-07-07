@@ -45,3 +45,7 @@ export const profileAddButton = document.querySelector('.profile__add-button');
 
 export const userAvatar = document.querySelector('.profile__avatar');
 export const formUserAvatar = document.querySelector('.form_type_avatar-edit');
+
+// Попап подтверждения удаления карточки
+
+export const trashButton = document.querySelector('.element__delete');

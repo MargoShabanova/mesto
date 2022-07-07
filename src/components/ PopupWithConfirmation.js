@@ -4,7 +4,7 @@ export default class  PopupWithConfirmation extends Popup{
     constructor(popupSelector) {
         super(popupSelector);
 
-        this._form = this._popup.querySelector(".form");
+        this._submitButton = this._popup.querySelector(".form__submit");
     }
 
     changeSubmitHandler(newSubmit) {
@@ -13,7 +13,7 @@ export default class  PopupWithConfirmation extends Popup{
 
     setEventListeners() {
         super.setEventListeners();
-        this._form.addEventListener('submit', (evt) => {
+        this._submitButton.addEventListener('click', (evt) => {
             evt.preventDefault();
             this._handleSubmit(this);
         })
@@ -21,6 +21,5 @@ export default class  PopupWithConfirmation extends Popup{
 
     close() {
         super.close();
-        this._form.reset();
     }
 }

@@ -4,11 +4,19 @@
       this._baseUrl = baseUrl
     }
 
+    _checkResponse(res) {
+        if (res.ok) {
+            return res.json();
+        } else {
+            return Promise.reject(`Ошибка: ${res.status}`);
+        }
+    }
+
     getProfile() {
         return fetch(`${this._baseUrl}/users/me`, {
             headers: this._headers
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .then(this._checkResponse)
         .catch(console.log)
     }
   
@@ -16,7 +24,7 @@
         return fetch(`${this._baseUrl}/cards`, {
             headers: this._headers
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .then(this._checkResponse)
         .catch(console.log)
     }
   
@@ -29,7 +37,7 @@
                 about
             })
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .then(this._checkResponse)
         .catch(console.log)
     }
 
@@ -42,7 +50,7 @@
                 link
             })
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .then(this._checkResponse)
         .catch(console.log)
     }
 
@@ -51,7 +59,7 @@
             method: "DELETE",
             headers: this._headers
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .then(this._checkResponse)
         .catch(console.log)
     }
 
@@ -60,7 +68,7 @@
             method: "DELETE",
             headers: this._headers
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .then(this._checkResponse)
         .catch(console.log)
     }
 
@@ -69,7 +77,7 @@
             method: "PUT",
             headers: this._headers
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .then(this._checkResponse)
         .catch(console.log)
     }
 
@@ -81,7 +89,7 @@
                 avatar
             })
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .then(this._checkResponse)
         .catch(console.log)
     }
   }

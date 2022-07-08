@@ -19,28 +19,20 @@ import PopupWithConfirmation from '../components/ PopupWithConfirmation.js';
 import UserInfo from '../components/UserInfo.js';
 import { api } from '../components/Api';
 
-let userId
-api.getProfile()
-  .then(res => {
-    userInfo.setUserInfo(res.name, res.about, res.avatar)
+let userId;
+Promise.all([api.getProfile(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userId = userData._id;
 
-    userId = res._id
+    userInfo.setUserInfo(
+      userData.name,
+      userData.about,
+      userData.avatar
+    );
+    section.renderItems(cards);
   })
-
-api.getInitialCards()
-  .then(cardList => {
-    cardList.forEach(data => {
-      const card = generateCard({
-        name: data.name,
-        link: data.link,
-        likes: data.likes,
-        id: data._id,
-        userId: userId,
-        ownerId: data.owner._id
-      });
-      section.addItem(card)
-    });
-  })
+  .catch((err) => 
+  console.log(`Ошибка: ${err}`))
 
 
 const validationConfig = {
@@ -61,10 +53,10 @@ function handleCardClick(name, link) {
 // Обработчики событий:
 
 // Клик на аватар
-function handleAvatarClick() {
+userAvatar.addEventListener('click', () => {
   popupAvatar.open();
   validateUserAvatar.resetValidation();
-}
+});
 
 // Клик на кнопку редактирования профиля
 profileEditButton.addEventListener('click', () => {
@@ -92,6 +84,8 @@ const handleProfileFormSubmit = (data) => {
       userInfo.setUserInfo(res.name, res.about, res.avatar);
       popupProfile.close();
     })
+    .catch((err) => 
+      console.log(`Ошибка: ${err}`))
     .finally(() => {
       popupProfile.renderLoading(false)
     })
@@ -107,6 +101,8 @@ const handleAvatarFormSubmit = (values) => {
         userInfo.setUserAvatar(res.avatar);
         popupAvatar.close();
       })
+      .catch((err) => 
+        console.log(`Ошибка: ${err}`))
       .finally(() => {
         popupAvatar.renderLoading(false);
       })
@@ -129,6 +125,8 @@ const handleFormCreate = (data) => {
       section.addItem(card);
       popupAddCard.close();
     })
+    .catch((err) => 
+      console.log(`Ошибка: ${err}`))
     .finally(() => {
       popupAddCard.renderLoading(false)
     })
@@ -137,7 +135,7 @@ const handleFormCreate = (data) => {
 
 // Генерация новой карточки
 const generateCard = (data) => {
-  const card = new Card(
+  const card = new Card({userId: userId},
     data,
     '#initial-template',
     handleCardClick,
@@ -149,6 +147,8 @@ const generateCard = (data) => {
           card.deleteCard()
           confirmPopup.close()
         })
+        .catch((err) => 
+          console.log(`Ошибка: ${err}`))
       })
     },
     (id) => {
@@ -157,11 +157,15 @@ const generateCard = (data) => {
         .then(res => {
           card.setLikes(res.likes)
         })
+        .catch((err) => 
+          console.log(`Ошибка: ${err}`))
       }else{
         api.addLike(id)
         .then(res => {
           card.setLikes(res.likes)
         })
+        .catch((err) => 
+          console.log(`Ошибка: ${err}`))
       }
     }
   );
@@ -170,7 +174,6 @@ const generateCard = (data) => {
 };
 
 const section = new Section({
-  items: [],
   renderer: (item) => {
     const cardElement = generateCard(item);
     section.addItem(cardElement);
@@ -179,7 +182,6 @@ const section = new Section({
 '.elements__list'
 );
 
-section.renderItems();
 
 // Экземпляры классов
 const imagePopup = new PopupWithImage('.popup_type_open-card');
@@ -198,10 +200,7 @@ confirmPopup.setEventListeners();
 const popupAvatar = new PopupWithForm('.popup_type_avatar-edit', handleAvatarFormSubmit);
 popupAvatar.setEventListeners();
 
-//const popupWithConfirmation = new PopupWithConfirmation();
-
-
-const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__metier', profileAvatarSelector: '.profile__avatar' }, handleAvatarClick);
+const userInfo = new UserInfo({ profileNameSelector: '.profile__name', profileJobSelector: '.profile__metier', profileAvatarSelector: '.profile__avatar' });
 
 // Валидация
 const validateEditProfile = new FormValidator(validationConfig, formProfile);
@@ -210,13 +209,3 @@ const validateUserAvatar = new FormValidator(validationConfig, formUserAvatar);
 validateEditProfile.enableValidation();
 validateAddCard.enableValidation();
 validateUserAvatar.enableValidation();
-
-Promise.all([api.getProfile(), api.getInitialCards()])
-  .then(([userData, cards]) => {
-    userId = userData._id;
-    userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
-    cards.reverse();
-    section.renderItems(cards);
-  })
-  .catch((err) => 
-  console.log('Ошибка: ${err}'));

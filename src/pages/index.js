@@ -29,6 +29,7 @@ Promise.all([api.getProfile(), api.getInitialCards()])
       userData.about,
       userData.avatar
     );
+    cards.reverse();
     section.renderItems(cards);
   })
   .catch((err) => 
@@ -114,14 +115,7 @@ const handleFormCreate = (data) => {
 
   api.addCard(data.name, data.link)
     .then(res => {
-      const card = generateCard({
-        name: res.name,
-        link: res.link,
-        likes: res.likes,
-        id: res._id,
-        userId: userId,
-        ownerId: res.owner._id
-      })
+      const card = generateCard(res)
       section.addItem(card);
       popupAddCard.close();
     })
